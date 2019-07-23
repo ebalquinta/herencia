@@ -23,22 +23,28 @@ var TelefonoConCamara = /** @class */ (function (_super) {
         _this.flash = false;
         return _this;
     }
+    TelefonoConCamara.prototype.prenderApagar = function () {
+        if (this.estaPrendido) {
+            if (this.flash)
+                this.flash = false;
+            this.estaPrendido = false;
+            console.log("Apagando celular Con Camara...");
+        }
+        else
+            this.estaPrendido = true;
+        console.log("Encendiendo celular Con Camara...");
+    };
     TelefonoConCamara.prototype.sacarFoto = function () {
         var entrada;
         if (this.isPrendido()) {
             this.camaraOnOff = true;
             console.log("Cámara encendida");
-            // entrada = readlineSync.question("encender cámara(S/N)");
-            // while (entrada.toLowerCase() != "s" || entrada.toLowerCase() != "n")
-            //     entrada = readlineSync.question("encender cámara(S/N)");
-            // entrada = "";
             if (!this.flash) {
                 console.log("Flash apagado");
                 entrada = readlineSync.question("encender flash(S/N)");
                 while (entrada.toLowerCase() != "s" && entrada.toLowerCase() != "n")
                     entrada = readlineSync.question("encender flash(S/N)");
             }
-            // }
             console.log("enfocando....clic");
             if (this.flash)
                 this.flash = false;
@@ -47,7 +53,7 @@ var TelefonoConCamara = /** @class */ (function (_super) {
         else
             console.log("Celular apagado, no se puede sacar foto");
     };
-    TelefonoConCamara.prototype.light = function () {
+    TelefonoConCamara.prototype.lightOnOff = function () {
         if (this.isPrendido()) {
             if (!this.flash) {
                 this.flash = true;

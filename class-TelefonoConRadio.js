@@ -25,6 +25,19 @@ var TelefonoConRadio = /** @class */ (function (_super) {
         _this.volumen = 0;
         return _this;
     }
+    TelefonoConRadio.prototype.prenderApagar = function () {
+        if (this.estaPrendido) {
+            if (this.radioOnOff) {
+                this.volumen = 0;
+                this.radioOnOff = false;
+            }
+            this.estaPrendido = false;
+            console.log("Apagando celular Con Radio...");
+        }
+        else
+            this.estaPrendido = true;
+        console.log("Encendiendo celular Con Radio...");
+    };
     TelefonoConRadio.prototype.encenderRadio = function () {
         if (this.isPrendido()) {
             if (!this.radioOnOff) {
@@ -32,9 +45,10 @@ var TelefonoConRadio = /** @class */ (function (_super) {
                 this.volumen = 50;
                 console.log("radio encendida");
             }
-            else
+            else {
                 this.radioOnOff = false;
-            console.log("radio apagada");
+                console.log("radio apagada");
+            }
         }
         else
             console.log("Celular apagado, no se puede encender radio");
@@ -70,11 +84,11 @@ var TelefonoConRadio = /** @class */ (function (_super) {
     TelefonoConRadio.prototype.verFrecuenciaActual = function () {
         if (this.isPrendido())
             if (this.radioOnOff)
-                return this.frecuenciaActual.toString();
+                console.log(this.frecuenciaActual.toString());
             else
-                return "Radio apagada, no se puede ver frecuencia";
+                console.log("Radio apagada, no se puede ver frecuencia");
         else
-            return "Celular apagado, no se puede ver frecuencia";
+            console.log("Celular apagado, no se puede ver frecuencia");
     };
     TelefonoConRadio.prototype.subirFrecuenciaActual = function () {
         if (this.isPrendido())
