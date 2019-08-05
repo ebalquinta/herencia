@@ -13,59 +13,69 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var readlineSync = require("readline-sync");
 var class_Telefono_1 = require("./class-Telefono");
+var class_Camara_1 = require("./class-Camara");
 var TelefonoConCamara = /** @class */ (function (_super) {
     __extends(TelefonoConCamara, _super);
+    // private flash: boolean;
     function TelefonoConCamara(numero, estaPrendido, bateriaActual) {
         var _this = _super.call(this, numero, estaPrendido, bateriaActual) || this;
-        _this.camaraOnOff = false;
-        _this.flash = false;
+        _this.camara = new class_Camara_1["default"]();
         return _this;
+        // this.flash = false;
     }
     TelefonoConCamara.prototype.prenderApagar = function () {
         if (this.estaPrendido) {
-            if (this.flash)
-                this.flash = false;
+            // if (this.flash) this.flash = false;
+            if (this.camara.isFlashOn())
+                this.camara.flashOnOff();
             this.estaPrendido = false;
             console.log("Apagando celular Con Camara...");
         }
-        else
+        else {
             this.estaPrendido = true;
-        console.log("Encendiendo celular Con Camara...");
+            console.log("Encendiendo celular Con Camara...");
+        }
     };
     TelefonoConCamara.prototype.sacarFoto = function () {
-        var entrada;
+        // let entrada: string;
         if (this.isPrendido()) {
-            this.camaraOnOff = true;
-            console.log("Cámara encendida");
-            if (!this.flash) {
-                console.log("Flash apagado");
-                entrada = readlineSync.question("encender flash(S/N)");
-                while (entrada.toLowerCase() != "s" && entrada.toLowerCase() != "n")
-                    entrada = readlineSync.question("encender flash(S/N)");
-            }
-            console.log("enfocando....clic");
-            if (this.flash)
-                this.flash = false;
-            this.camaraOnOff = false;
+            console.log("Celular encendido:", this.isPrendido());
+            // this.camaraOnOff = true;
+            // console.log("Cámara encendida");
+            // if (!this.flash) {
+            //     console.log("Flash apagado");
+            //     entrada = readlineSync.question("encender flash(S/N)");
+            //     while (entrada.toLowerCase() != "s" && entrada.toLowerCase() != "n")
+            //         entrada = readlineSync.question("encender flash(S/N)");
+            //     if (entrada.toLowerCase() == "s")
+            //         this.flash = true;
+            // }
+            // console.log("enfocando....clic");
+            // if (this.flash) 
+            //     this.flash = false;
+            // this.camaraOnOff = false;
+            this.camara.sacarFoto();
         }
         else
-            console.log("Celular apagado, no se puede sacar foto");
+            console.log("Celular encendido:", this.isPrendido(), ". NO se puede tomar foto.");
     };
     TelefonoConCamara.prototype.lightOnOff = function () {
         if (this.isPrendido()) {
-            if (!this.flash) {
-                this.flash = true;
-                console.log("linterna encendida");
-            }
-            else {
-                this.flash = false;
-                console.log("linterna apagada");
-            }
+            // if (!this.flash) {
+            //     this.flash = true;
+            //     console.log("linterna encendida");
+            // } else {
+            //     this.flash = false;
+            //     console.log("linterna apagada");
+            // }
+            console.log("Celular encendido:", this.isPrendido());
+            this.camara.flashOnOff();
+            console.log("linterna encendida:", this.camara.isFlashOn());
         }
         else
-            console.log("Celular apagado, no se puede encender linterna");
+            // console.log("Celular apagado, no se puede encender linterna");
+            console.log("Celular encendido:", this.isPrendido(), ". NO se puede encender linterna.");
     };
     return TelefonoConCamara;
 }(class_Telefono_1["default"]));
