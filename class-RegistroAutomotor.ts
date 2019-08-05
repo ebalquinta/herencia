@@ -90,7 +90,7 @@ class RegistroAutomotor {
             // (<Camion>updateVehiculo).setEjes(parseInt(this.updateLine("ingrese nueva cantidad de ejes: ", vehiculo.getEjes().toString())));
             (<Camion>updateVehiculo).setEjes(this.updateLine("ingrese nueva cantidad de ejes: ", vehiculo.getEjes()));
             (<Camion>updateVehiculo).setTara(this.updateLine("ingrese nueva tara: ", vehiculo.getTara()));
-
+            (<Camion>updateVehiculo).setCarga(this.updateLine("ingrese nueva tara: ", vehiculo.getCarga()));
         }
         return updateVehiculo;
     }
