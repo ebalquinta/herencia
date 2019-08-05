@@ -1,12 +1,12 @@
 import * as readlineSync from 'readline-sync';
 
 export default class Camara {
-    private flash: boolean;
     private onOff: boolean;
+    private flash: boolean;
 
     public constructor() {
-        this.flash = false;
         this.onOff = false;
+        this.flash = false;
     }
 
     public isOn(): boolean {
@@ -24,15 +24,23 @@ export default class Camara {
         return this.flash;
     }
 
+    public flashOnOff(): void {
+        if (this.flash)
+            this.flash = false;
+        else
+            this.flash = true;
+    }
+
     public sacarFoto(): void {
         let entrada: string;
+        if (!this.isOn())
+            this.setOnOff();
+        console.log("Camara encendida:", this.isOn());
         entrada = readlineSync.question("Tomar foto(S/N)");
         while (entrada.toLowerCase() != "s" && entrada.toLowerCase() != "n")
             entrada = readlineSync.question("Tomar foto(S/N)");
         while (entrada.toLocaleLowerCase() == "s") {
-            this.setOnOff();
-            console.log("Camara encendida");
-            if (!this.isFlashOn) {
+            if (!this.isFlashOn()) {
                 console.log("Flash apagado");
                 entrada = readlineSync.question("encender flash(S/N)");
                 while (entrada.toLowerCase() != "s" && entrada.toLowerCase() != "n")
@@ -40,7 +48,7 @@ export default class Camara {
                 if (entrada.toLowerCase() == "s")
                     this.flash = true;
             }
-            console.log("enfocando....clic");
+            console.log("flash:", this.isFlashOn(), ". Enfocando....clic");
             if (this.isFlashOn())
                 this.flash = false;
             entrada = readlineSync.question("Tomar otra foto(S/N)");
@@ -48,6 +56,6 @@ export default class Camara {
                 entrada = readlineSync.question("Tomar otra foto(S/N)");
         }
         this.setOnOff();
-        console.log("Camara apagada");
+        console.log("Camara encendida:", this.isOn());
     }
 }

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "testRegistroAutomotor": "tsc testRegistroAutomotor.ts && node testRegistroAutomotor.js"
+    "testRegistroAutomotor": "tsc testRegistroAutomotor.ts && node testRegistroAutomotor.js",
+    "testTelefono": "tsc test-Telefono.ts && node test-Telefono.js"
   },
   "author": "E Balquinta",
   "license": "ISC",

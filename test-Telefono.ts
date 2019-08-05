@@ -21,7 +21,11 @@ telefono1.prenderApagar();
 // telefono2.verFrecuenciaActual();
 // telefono2.encenderRadio();
 // telefono2.verFrecuenciaActual();
+(<TelefonoConCamara>telefono1).lightOnOff();
+(<TelefonoConCamara>telefono1).sacarFoto();
+telefono1.prenderApagar();
+(<TelefonoConCamara>telefono1).lightOnOff();
 
-telefono1.mandarMensaje('./SMS.txt');
+// telefono1.mandarMensaje('./SMS.txt');
 console.log("telefono1:",telefono1);
 // console.log("telefono2:",telefono2);
