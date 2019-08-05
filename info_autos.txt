@@ -1,0 +1,5 @@
+Auto,Ford,Fiesta,Nafta,2004,ABC123
+Auto,Fiat,Palio,Diesel,2006,BCD234
+Camion,Scania,113H,Diesel,2003,DEF456
+Moto,Honda,Transalp,Nafta,2004,EFG567
+Camion,Iveco,EuroCargo,Diesel,2005,FGH678

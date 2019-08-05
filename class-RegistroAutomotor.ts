@@ -1,5 +1,8 @@
 import Vehiculo from "./class-Vehiculo";
 import * as readlineSync from 'readline-sync';
+import Auto from "./class-auto";
+import Camion from "./class-camion";
+import Moto from "./class-moto";
 
 class RegistroAutomotor {
     private nombre: string;
@@ -53,7 +56,7 @@ class RegistroAutomotor {
         return resultVehiculo;
     }
 
-    public borrarAuto(dominio: string): void {
+    public borrarVehiculo(dominio: string): void {
         if (this.buscarVehiculo(dominio) != -1) {
             let index: number = this.buscarVehiculo(dominio);
             this.listaVehiculos.splice(index, 1);
@@ -71,12 +74,24 @@ class RegistroAutomotor {
     }
 
     private update(vehiculo: Vehiculo): Vehiculo {
-        let updateVehiculo: Vehiculo = new Vehiculo();
+        let updateVehiculo: Vehiculo; //= new Vehiculo();
+        if (vehiculo instanceof Camion)
+            updateVehiculo = new Camion();
+        if (vehiculo instanceof Auto)
+            updateVehiculo = new Auto();
+        if (vehiculo instanceof Moto)
+            updateVehiculo = new Moto();
         updateVehiculo.setMarca(this.updateLine("ingrese nueva marca: ", vehiculo.getMarca()));
         updateVehiculo.setModelo(this.updateLine("ingrese nuevo modelo: ", vehiculo.getModelo()));
         updateVehiculo.setCombustible(this.updateLine("ingrese nuevo combustible: ", vehiculo.getCombustible()));
         updateVehiculo.setAnio(this.updateLine("ingrese nuevo anio: ", vehiculo.getAnio()));
         updateVehiculo.setDominio(this.updateLine("ingrese nuevo dominio: ", vehiculo.getDominio()));
+        if (vehiculo instanceof Camion) {
+            // (<Camion>updateVehiculo).setEjes(parseInt(this.updateLine("ingrese nueva cantidad de ejes: ", vehiculo.getEjes().toString())));
+            (<Camion>updateVehiculo).setEjes(this.updateLine("ingrese nueva cantidad de ejes: ", vehiculo.getEjes()));
+            (<Camion>updateVehiculo).setTara(this.updateLine("ingrese nueva tara: ", vehiculo.getTara()));
+
+        }
         return updateVehiculo;
     }
 
@@ -84,8 +99,8 @@ class RegistroAutomotor {
         if (this.buscarVehiculo(dominio) != -1) {
             console.log("dominio ", dominio, " encontrado:");
             let index = this.buscarVehiculo(dominio);
-            let resultAuto: Vehiculo = this.listaVehiculos[index];
-            this.listaVehiculos[index] = this.update(resultAuto);
+            let resultVehiculo: Vehiculo = this.listaVehiculos[index];
+            this.listaVehiculos[index] = this.update(resultVehiculo);
             console.log("dominio:", dominio, "actualizado");
         } else
             console.log("dominio:", dominio, "no encontrado");
@@ -93,11 +108,11 @@ class RegistroAutomotor {
 
     public ingresarVehiculo(vehiculo: Vehiculo): boolean {
         if (this.consultarVehiculo(vehiculo.getDominio()) != null) {
-            console.log("auto duplicado, no añadido");
+            console.log("vehiculo duplicado, no añadido");
             return false;
         } else {
             this.listaVehiculos.push(vehiculo);
-            console.log("auto nuevo añadido");
+            console.log("vehiculo nuevo añadido");
             return true;
         }
     }
