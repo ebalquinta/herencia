@@ -31,9 +31,12 @@ export default class TelefonoConCamara extends Telefono {
                 entrada = readlineSync.question("encender flash(S/N)");
                 while (entrada.toLowerCase() != "s" && entrada.toLowerCase() != "n")
                     entrada = readlineSync.question("encender flash(S/N)");
+                if (entrada.toLowerCase() == "s")
+                    this.flash = true;
             }
             console.log("enfocando....clic");
-            if (this.flash) this.flash = false;
+            if (this.flash) 
+                this.flash = false;
             this.camaraOnOff = false;
         } else
             console.log("Celular apagado, no se puede sacar foto");
